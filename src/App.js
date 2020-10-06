@@ -2,8 +2,6 @@ import React from 'react';
 import './App.css';
 import SearchBar from './components/SearchBar';
 import ClientList from './components/clientList';
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -20,30 +18,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#5300B7',
-    },
-    secondary: {
-      main: '#B85300',
-    },
-  },
-});
-
 function App() {
   const classes = useStyles();
     return (
     <>
-      <ThemeProvider theme={theme}>
-        <Paper className={classes.paper}>
-          <h3>MANAGEMENT</h3>
-          <h2>Clients</h2>
-          <SearchBar />
-          <ClientList />
-        </Paper>
-     </ThemeProvider>
-     </>
+      <Paper className={classes.paper}>
+        <h3>MANAGEMENT</h3>
+        <h2>Clients</h2>
+        <SearchBar />
+        <ClientList />
+      </Paper>
+    </>
   );
 }
 
