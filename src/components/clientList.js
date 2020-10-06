@@ -1,16 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
+import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
 import Toolbar from '@material-ui/core/Toolbar';
 import Checkbox from '@material-ui/core/Checkbox';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import CreateIcon from '@material-ui/icons/Create';
 import { makeStyles } from '@material-ui/core/styles';
+import ClientRow from './ClientRow';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -54,25 +53,6 @@ const ClientList = () => {
     setSelected([]);
   };
 
-  const handleClick = (event, clientId) => {
-    const selectedIndex = selected.indexOf(clientId);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, clientId);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
-      );
-    }
-
-    setSelected(newSelected);
-  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -82,8 +62,6 @@ const ClientList = () => {
     setclientsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
-  const isSelected = (clientId) => selected.indexOf(clientId) !== -1;
 
   if (!clients) {
     return (
@@ -111,40 +89,11 @@ const ClientList = () => {
         <TableBody>
           {clients
             .slice(page * clientsPerPage, page * clientsPerPage + clientsPerPage)
-            .map((client, index) => (
-            <TableRow
-              key={index}
-              >
-              <TableCell>
-                <Checkbox
-                  checked={isSelected(client.clientId)}
-                  onClick={(event) => handleClick(event, client.clientId)}
-                  />
-              </TableCell>
-              <TableCell>
-                {client.clientName}
-              </TableCell>
-              <TableCell>
-                {client.clientEmail}
-              </TableCell>
-              <TableCell>
-                {client.clientWorkPhone}
-              </TableCell>
-              <TableCell>
-                {client.clientIndustry}
-              </TableCell>
-              <TableCell>
-                {client.clientPocName}
-              </TableCell>
-              <TableCell>
-                {client.clientWebsite}
-              </TableCell>
-              <TableCell>
-                <Button variant="outlined" color="primary">
-                  <CreateIcon />
-                </Button>
-              </TableCell>
-            </TableRow>
+            .map(client => (
+              <ClientRow
+                client={client}
+                selected={selected}
+                setSelected />
           ))}
         </TableBody>
       </Table>
