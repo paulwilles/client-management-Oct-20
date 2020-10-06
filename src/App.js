@@ -1,25 +1,49 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import SearchBar from './components/SearchBar';
+import ClientList from './components/clientList';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+  },
+  paper: {
+    width: '100%',
+    marginBottom: theme.spacing(2),
+    backgroundColor: '#F4F6F8',
+    padding: '50px',
+  },
+}));
+
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#5300B7',
+    },
+    secondary: {
+      main: '#B85300',
+    },
+  },
+});
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  const classes = useStyles();
+    return (
+    <>
+      <ThemeProvider theme={theme}>
+        <Paper className={classes.paper}>
+          <h3>MANAGEMENT</h3>
+          <h2>Clients</h2>
+          <SearchBar />
+          <ClientList />
+        </Paper>
+     </ThemeProvider>
+     </>
   );
 }
 
