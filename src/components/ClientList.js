@@ -5,10 +5,10 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
-import Toolbar from '@material-ui/core/Toolbar';
 import Checkbox from '@material-ui/core/Checkbox';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
+import ClientToolbar from './ClientToolbar';
 import ClientRow from './ClientRow';
 
 const useStyles = makeStyles((theme) => ({
@@ -70,9 +70,7 @@ const ClientList = () => {
   }
   return (
     <Paper className={classes.paper}>
-      <Toolbar>
-
-      </Toolbar>
+      <ClientToolbar />
       <Table>
         <TableHead>
           <TableRow>
