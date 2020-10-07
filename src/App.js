@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import SearchBar from './components/SearchBar';
-import ClientList from './components/clientList';
+import ClientList from './components/ClientList';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 

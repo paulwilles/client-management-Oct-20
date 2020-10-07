@@ -92,6 +92,7 @@ const ClientList = () => {
             .map(client => (
               <ClientRow
                 client={client}
+                headCells={headCells}
                 selected={selected}
                 setSelected />
           ))}

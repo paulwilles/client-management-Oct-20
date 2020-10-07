@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import CreateIcon from '@material-ui/icons/Create';
 
 const ClientRow = props => {
-  const { client, selected, setSelected } = props;
+  const { client, headCells, selected, setSelected } = props;
 
   const isSelected = (clientId) => selected.indexOf(clientId) !== -1;
 
@@ -36,24 +36,11 @@ const ClientRow = props => {
           onClick={(event) => handleClick(event, client.clientId)}
           />
       </TableCell>
-      <TableCell>
-        {client.clientName}
-      </TableCell>
-      <TableCell>
-        {client.clientEmail}
-      </TableCell>
-      <TableCell>
-        {client.clientWorkPhone}
-      </TableCell>
-      <TableCell>
-        {client.clientIndustry}
-      </TableCell>
-      <TableCell>
-        {client.clientPocName}
-      </TableCell>
-      <TableCell>
-        {client.clientWebsite}
-      </TableCell>
+      {headCells.map(headCell => (
+        <TableCell key={headCell.id}>
+          {client[headCell.id]}
+        </TableCell>
+      ))}
       <TableCell>
         <Button variant="outlined" color="primary">
           <CreateIcon />
