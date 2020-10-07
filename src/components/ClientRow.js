@@ -29,7 +29,7 @@ const ClientRow = props => {
   };
 
   return (
-    <TableRow key={client.clientId}>
+    <TableRow>
       <TableCell>
         <Checkbox
           checked={isSelected(client.clientId)}

@@ -99,6 +99,7 @@ const ClientList = () => {
               .slice(page * clientsPerPage, page * clientsPerPage + clientsPerPage)
               .map(client => (
                 <ClientRow
+                  key={client.clientId}
                   client={client}
                   headCells={headCells}
                   selected={selected}
