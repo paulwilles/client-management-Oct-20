@@ -6,11 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-  },
   paper: {
-    width: '100%',
     marginBottom: theme.spacing(2),
     backgroundColor: '#F4F6F8',
     padding: '50px',

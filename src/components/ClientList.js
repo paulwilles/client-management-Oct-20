@@ -13,8 +13,13 @@ import ClientRow from './ClientRow';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    margin: 0,
-  },
+    overflowX: 'auto',
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    marginTop: 50,
+    padding: 10,
+    margin: 10,
+  }
 }));
 
 const headCells = [
