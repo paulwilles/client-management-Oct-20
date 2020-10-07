@@ -7,6 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import Checkbox from '@material-ui/core/Checkbox';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import ClientToolbar from './ClientToolbar';
 import ClientRow from './ClientRow';
@@ -16,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     overflowX: 'auto',
     marginRight: 'auto',
     marginLeft: 'auto',
-    marginTop: 50,
+    marginTop: 5,
     padding: 10,
     margin: 10,
   }
@@ -74,43 +75,48 @@ const ClientList = () => {
     )
   }
   return (
-    <Paper className={classes.paper}>
-      <ClientToolbar />
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>
-              <Checkbox onChange={handleSelectAllClick} />
-            </TableCell>
-          {headCells.map(headCell => (
-            <TableCell key={headCell.id}>
-              {headCell.label}
-            </TableCell>
-          ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {clients
-            .slice(page * clientsPerPage, page * clientsPerPage + clientsPerPage)
-            .map(client => (
-              <ClientRow
-                client={client}
-                headCells={headCells}
-                selected={selected}
-                setSelected />
-          ))}
-        </TableBody>
-      </Table>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
-        component="div"
-        count={clients.length}
-        rowsPerPage={clientsPerPage}
-        page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeclientsPerPage}
-      />
-    </Paper>
+    <>
+      <Typography >
+          {clients.length} Records found. Page {page + 1} of {Math.ceil(clients.length / clientsPerPage)}
+        </Typography>
+      <Paper className={classes.paper}>
+        <ClientToolbar />
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>
+                <Checkbox onChange={handleSelectAllClick} />
+              </TableCell>
+            {headCells.map(headCell => (
+              <TableCell key={headCell.id}>
+                {headCell.label}
+              </TableCell>
+            ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {clients
+              .slice(page * clientsPerPage, page * clientsPerPage + clientsPerPage)
+              .map(client => (
+                <ClientRow
+                  client={client}
+                  headCells={headCells}
+                  selected={selected}
+                  setSelected />
+            ))}
+          </TableBody>
+        </Table>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={clients.length}
+          rowsPerPage={clientsPerPage}
+          page={page}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeclientsPerPage}
+        />
+      </Paper>
+    </>
 )};
 
 export default ClientList;

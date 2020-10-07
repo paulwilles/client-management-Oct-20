@@ -45,14 +45,19 @@ const useStyles = makeStyles((theme) => ({
       width: '20ch',
     },
   },
+  searchbar: {
+    margin: 10,
+  }
 }));
 
 const SearchBar = () => {
   const classes = useStyles();
   return (
-     <Grid container
+     <Grid
+      container
       spacing={1}
-      justify="space-between">
+      justify="space-between"
+      className={classes.searchbar}>
       <Grid
         item xs={12} md={6}
         container
