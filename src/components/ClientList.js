@@ -1,4 +1,8 @@
 import React, {useEffect, useState} from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
@@ -6,22 +10,29 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import Checkbox from '@material-ui/core/Checkbox';
-import Paper from '@material-ui/core/Paper';
+import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import ClientToolbar from './ClientToolbar';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ClientRow from './ClientRow';
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
+  card: {
     overflowX: 'auto',
     marginRight: 'auto',
     marginLeft: 'auto',
     marginTop: 5,
-    padding: 10,
     margin: 10,
-  }
-}));
+  },
+  cardContent: {
+    padding: 0,
+  },
+  table: {
+    minWidth: 750,
+  },
+  head: {
+    backgroundColor: '#F4F6F8',
+    color: theme.palette.common.white,
+  },}));
 
 const headCells = [
   { id: 'clientName', numeric: false, disablePadding: true, label: 'Client Name' },
@@ -79,45 +90,57 @@ const ClientList = () => {
       <Typography >
           {clients.length} Records found. Page {page + 1} of {Math.ceil(clients.length / clientsPerPage)}
         </Typography>
-      <Paper className={classes.paper}>
-        <ClientToolbar />
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>
-                <Checkbox onChange={handleSelectAllClick} />
-              </TableCell>
-            {headCells.map(headCell => (
-              <TableCell key={headCell.id}>
-                {headCell.label}
-              </TableCell>
-            ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {clients
-              .slice(page * clientsPerPage, page * clientsPerPage + clientsPerPage)
-              .map(client => (
-                <ClientRow
-                  key={client.clientId}
-                  client={client}
-                  headCells={headCells}
-                  selected={selected}
-                  setSelected />
-            ))}
-          </TableBody>
-        </Table>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={clients.length}
-          rowsPerPage={clientsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeclientsPerPage}
+        <Card className={classes.card}>
+        <CardHeader
+           action={
+            <IconButton aria-label="settings">
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title='All Clients'
         />
-      </Paper>
+        <CardContent className={classes.cardContent}>
+          <Table>
+            <TableHead className={classes.head}>
+              <TableRow>
+                <TableCell>
+                  <Checkbox onChange={handleSelectAllClick} />
+                </TableCell>
+              {headCells.map(headCell => (
+                <TableCell key={headCell.id}>
+                  {headCell.label}
+                </TableCell>
+              ))}
+                <TableCell>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {clients
+                .slice(page * clientsPerPage, page * clientsPerPage + clientsPerPage)
+                .map(client => (
+                  <ClientRow
+                    key={client.clientId}
+                    client={client}
+                    headCells={headCells}
+                    selected={selected}
+                    setSelected />
+              ))}
+            </TableBody>
+          </Table>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={clients.length}
+            rowsPerPage={clientsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeclientsPerPage}
+          />
+        </CardContent>
+      </Card>
     </>
-)};
+  )
+}
 
 export default ClientList;
