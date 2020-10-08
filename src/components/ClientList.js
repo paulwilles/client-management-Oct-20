@@ -113,7 +113,7 @@ const ClientList = ({ clients }) => {
                     client={client}
                     headCells={headCells}
                     selected={selected}
-                    setSelected />
+                    setSelected={setSelected} />
               ))}
             </TableBody>
           </Table>
