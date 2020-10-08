@@ -15,11 +15,9 @@ const useStyles = makeStyles((theme) => ({
     border: 'solid 1px #E1E3E4',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: '#fff',
-    marginRight: theme.spacing(2),
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
       width: 'auto',
     },
   },
@@ -45,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
       width: '20ch',
     },
   },
+  button: {
+    backgroundColor: '#fff',
+  },
   searchbar: {
     margin: 10,
   }
@@ -61,7 +62,8 @@ const SearchBar = () => {
       <Grid
         item xs={12} md={6}
         container
-        justify="flex-start">
+        justify="flex-start"
+        spacing={2}>
         <Grid item xs={12} sm={6}>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -79,14 +81,16 @@ const SearchBar = () => {
         </Grid>
         <Grid item xs={6} sm={3}>
           <Button
-            variant="outlined"
+            variant="contained"
+            className={classes.button}
             fullWidth>
               Search
           </Button>
         </Grid>
         <Grid item xs={6} sm={3}>
           <Button
-            variant="outlined"
+            variant="contained"
+            className={classes.button}
             fullWidth>
               Clear
           </Button>
