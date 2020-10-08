@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -43,23 +43,12 @@ const headCells = [
   { id: 'clientWebsite', numeric: false, disablePadding: false, label: 'clientWebsite' },
 ];
 
-const ClientList = () => {
+const ClientList = ({clients}) => {
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
   const [clientsPerPage, setclientsPerPage] = useState(5);
-  const [clients, setClients] = useState([]);
 
   const classes = useStyles();
-
-  useEffect(() => {
-    getClients();
-  }, [])
-
-  const getClients = async() => {
-    const response = await fetch(`http://javareesbyapi-env.eba-rtdeyeqd.ap-southeast-2.elasticbeanstalk.com/api/v1/getallclients/tenant/reesby`);
-    const data = await response.json();
-    setClients(data);
-  }
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
