@@ -17,11 +17,18 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const [clients, setClients] = useState([]);
+  const [search, setSearch] = useState([]);
+  const [filter, setFilter] = useState('');
+  const [filteredClients, setFilteredClients] = useState([]);
   const classes = useStyles();
 
   useEffect(() => {
     getClients();
   }, [])
+
+  useEffect(() => {
+    setFilteredClients(clients.filter(client => Object.entries(client).some(str => str[1] && str[1].includes(filter))));
+  }, [clients, filter])
 
   const getClients = async() => {
     const response = await fetch(`http://javareesbyapi-env.eba-rtdeyeqd.ap-southeast-2.elasticbeanstalk.com/api/v1/getallclients/tenant/reesby`);
@@ -34,8 +41,8 @@ function App() {
       <Paper className={classes.paper}>
         <Typography variant='h6'>MANAGEMENT</Typography>
         <Typography variant='h2'>Clients</Typography>
-        <SearchBar />
-        <ClientList clients={clients} />
+        <SearchBar search={search} setSearch={setSearch} setFilter={setFilter} />
+        <ClientList clients={filteredClients} />
       </Paper>
     </>
   );

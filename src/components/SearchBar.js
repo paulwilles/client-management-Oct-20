@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const SearchBar = () => {
+const SearchBar = ({ search, setSearch, setFilter }) => {
   const classes = useStyles();
   return (
      <Grid
@@ -76,6 +76,8 @@ const SearchBar = () => {
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              onChange={e => setSearch(e.target.value)}
+              value={search}
             />
           </div>
         </Grid>
@@ -83,7 +85,9 @@ const SearchBar = () => {
           <Button
             variant="contained"
             className={classes.button}
-            fullWidth>
+            fullWidth
+            onClick={() => setFilter(search)}
+          >
               Search
           </Button>
         </Grid>
@@ -91,7 +95,9 @@ const SearchBar = () => {
           <Button
             variant="contained"
             className={classes.button}
-            fullWidth>
+            fullWidth
+            onClick={() => {setSearch(''); setFilter('')}}
+          >
               Clear
           </Button>
         </Grid>

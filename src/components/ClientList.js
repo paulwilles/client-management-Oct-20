@@ -43,7 +43,7 @@ const headCells = [
   { id: 'clientWebsite', numeric: false, disablePadding: false, label: 'clientWebsite' },
 ];
 
-const ClientList = ({clients}) => {
+const ClientList = ({ clients }) => {
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
   const [clientsPerPage, setclientsPerPage] = useState(5);
