@@ -27,7 +27,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    setFilteredClients(clients.filter(client => Object.entries(client).some(str => str[1] && str[1].includes(filter))));
+    setFilteredClients(clients.filter(client => client.clientName.toLowerCase().includes(filter.toLowerCase())));
   }, [clients, filter])
 
   const getClients = async() => {
