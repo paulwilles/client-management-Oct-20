@@ -32,5 +32,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@reduxjs/toolkit": "^1.4.0",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5"
   }
 }

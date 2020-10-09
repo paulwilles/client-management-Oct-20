@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import './App.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectAllClients, fetchClients } from './clientsSlice'
 import SearchBar from './components/SearchBar';
 import ClientList from './components/ClientList';
 import Paper from '@material-ui/core/Paper';
@@ -16,33 +17,42 @@ const useStyles = makeStyles((theme) => ({
 
 
 function App() {
-  const [clients, setClients] = useState([]);
   const [search, setSearch] = useState([]);
   const [filter, setFilter] = useState('');
   const [filteredClients, setFilteredClients] = useState([]);
   const classes = useStyles();
+  const dispatch = useDispatch()
+  const clients = useSelector(selectAllClients);
+  const clientStatus = useSelector(state => state.clients.status)
+  const error = useSelector(state => state.clients.error)
 
   useEffect(() => {
-    getClients();
-  }, [])
+    if (clientStatus === 'idle') {
+      dispatch(fetchClients())
+    }
+  }, [clientStatus, dispatch])
 
   useEffect(() => {
     setFilteredClients(clients.filter(client => client.clientName.toLowerCase().includes(filter.toLowerCase())));
   }, [clients, filter])
 
-  const getClients = async() => {
-    const response = await fetch(`http://javareesbyapi-env.eba-rtdeyeqd.ap-southeast-2.elasticbeanstalk.com/api/v1/getallclients/tenant/reesby`);
-    const data = await response.json();
-    setClients(data);
+  let content;
+
+  if (clientStatus === 'loading') {
+    content = <div className="loader">Loading...</div>
+  } else if (clientStatus === 'succeeded') {
+    content = <ClientList clients={filteredClients} />
+  } else if (clientStatus === 'failed') {
+    content = <div>{error}</div>
   }
 
-      return (
+  return (
     <>
       <Paper className={classes.paper}>
         <Typography variant='h6'>MANAGEMENT</Typography>
         <Typography variant='h2'>Clients</Typography>
         <SearchBar search={search} setSearch={setSearch} setFilter={setFilter} />
-        <ClientList clients={filteredClients} />
+        {content}
       </Paper>
     </>
   );
