@@ -9,10 +9,10 @@ import LanguageIcon from '@material-ui/icons/Language';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import TwitterIcon from '@material-ui/icons/Twitter';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    overflowX: 'auto',
     marginRight: 'auto',
     marginLeft: 'auto',
     marginTop: 5,
@@ -196,6 +196,15 @@ const AddClient = () => {
                 fullWidth
                 color="secondary"
               />
+            </Grid>
+          </Grid>
+
+          <Grid item xs={12} container justify="flex-end" spacing={3}>
+            <Grid item>
+              <Button variant="contained" color="default">Cancel</Button>
+            </Grid>
+            <Grid item>
+              <Button variant="contained" color="default">Save</Button>
             </Grid>
           </Grid>
         </Grid>
