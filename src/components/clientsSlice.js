@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 const initialState = {
   clients: [],
+  clientsPage: 0,
   status: 'idle',
   error: null
 };
@@ -39,6 +40,9 @@ export const clientsSlice = createSlice({
           existingClient[key] = action.payload[key];
         }
       }
+    },
+    setClientPage(state, action){
+      state.clientsPage = action.payload;
     }
   },
   extraReducers: {
@@ -61,7 +65,7 @@ export const clientsSlice = createSlice({
   }
 });
 
-export const { addClient } = clientsSlice.actions;
+export const { addClient, setClientPage } = clientsSlice.actions;
 
 export default clientsSlice.reducer;
 
@@ -69,3 +73,5 @@ export const selectAllClients = state => state.clients.clients;
 
 export const selectClientById = (state, clientId) =>
   state.clients.clients.find(client => client.clientId === clientId);
+
+export const clientsPage = state => state.clients.clientsPage;

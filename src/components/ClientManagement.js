@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import SearchBar from './SearchBar';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectAllClients, fetchClients } from './clientsSlice'
+import { selectAllClients, fetchClients, setClientPage } from './clientsSlice';
 import ClientList from './ClientList';
 import { Link } from 'react-router-dom'
 
@@ -26,7 +26,8 @@ const ClientManagement = () => {
 
   useEffect(() => {
     setFilteredClients(clients.filter(client => client.clientName.toLowerCase().includes(filter.toLowerCase())));
-  }, [clients, filter])
+    dispatch(setClientPage(0));
+  }, [clients, filter, dispatch])
 
   let content;
 

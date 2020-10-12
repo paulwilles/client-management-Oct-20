@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -14,6 +15,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ClientRow from './ClientRow';
+import { clientsPage, setClientPage } from './clientsSlice';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -45,8 +47,9 @@ const headCells = [
 
 const ClientList = ({ clients }) => {
   const [selected, setSelected] = useState([]);
-  const [page, setPage] = useState(0);
   const [clientsPerPage, setclientsPerPage] = useState(5);
+  const dispatch = useDispatch();
+  const page = useSelector(clientsPage);
 
   const classes = useStyles();
 
@@ -61,12 +64,12 @@ const ClientList = ({ clients }) => {
 
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+    dispatch(setClientPage(newPage));
   };
 
   const handleChangeclientsPerPage = (event) => {
     setclientsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+    dispatch(setClientPage(0));
   };
 
   if (!clients) {
