@@ -12,6 +12,18 @@ export const fetchClients = createAsyncThunk('clients/fetchClients', async () =>
   return data;
 });
 
+export const addNewClient = createAsyncThunk('clients/addNewClient', async (initialClient) => {
+  console.log(initialClient);
+  const response = await fetch('http://javareesbyapi-env.eba-rtdeyeqd.ap-southeast-2.elasticbeanstalk.com/api/v1/addclient', {
+    method: 'POST',
+    body: JSON.stringify(initialClient),
+    headers: { 'Content-Type': 'application/json' },
+  })
+  const data = await response.json();
+  return data;
+  }
+);
+
 export const clientsSlice = createSlice({
   name: 'client',
   initialState,
@@ -41,6 +53,10 @@ export const clientsSlice = createSlice({
     [fetchClients.rejected]: (state, action) => {
       state.status = 'failed'
       state.error = action.error.message
+    },
+    [addNewClient.fulfilled]: (state, action) => {
+      // We can directly add the new Client object to our clients array
+      state.clients.push(action.payload)
     }
   }
 });
