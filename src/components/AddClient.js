@@ -74,19 +74,6 @@ const AddClient = () => {
             })
           );
           unwrapResult(resultAction);
-          setClientName('');
-          setClientEmail('');
-          setClientWorkPhone('');
-          setClientAddress('');
-          setClientPersonalPhone('');
-          setClientPocName('');
-          setClientFax('');
-          setClientIndustry('');
-          setClientContract('');
-          setClientWebsite('');
-          setFacebook('');
-          setInstagram('');
-          setTwitter('');
        } catch (err) {
           console.error('Failed to save the post: ', err);
         } finally {

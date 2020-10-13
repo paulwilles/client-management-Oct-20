@@ -9,6 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import ClientManagement from './components/ClientManagement';
 import AddClient from './components/AddClient';
+import EditClient from './components/UpdateClient';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,6 +36,7 @@ function App() {
           />
           <Route exact path="/" component={ClientManagement} />
           <Route exact path="/addClient" component={AddClient} />
+          <Route exact path="/editClient" component={EditClient} />
           <Redirect to="/" />
         </Switch>
       </Paper>

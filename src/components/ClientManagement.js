@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -15,14 +15,15 @@ const ClientManagement = () => {
   const [filteredClients, setFilteredClients] = useState([]);
   const dispatch = useDispatch()
   const clients = useSelector(selectAllClients);
-  const clientStatus = useSelector(state => state.clients.status)
-  const error = useSelector(state => state.clients.error)
+  const clientStatus = useSelector(state => state.clients.status);
+  const error = useSelector(state => state.clients.error);
 
   useEffect(() => {
     if (clientStatus === 'idle') {
       dispatch(fetchClients())
     }
-  }, [clientStatus, dispatch])
+  }, [clientStatus, dispatch]);
+
 
   useEffect(() => {
     setFilteredClients(clients.filter(client => client.clientName.toLowerCase().includes(filter.toLowerCase())));
@@ -32,7 +33,7 @@ const ClientManagement = () => {
   let content;
 
   if (clientStatus === 'loading') {
-    content = <div className="loader">Loading...</div>
+    content = <div>Loading...</div>
   } else if (clientStatus === 'succeeded') {
     content = <ClientList clients={filteredClients} />
   } else if (clientStatus === 'failed') {
